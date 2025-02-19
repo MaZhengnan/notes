@@ -1,0 +1,54 @@
+#+TITLE: Tips and tricks in org mode  
+#+AUTHOR: Ma Zhengnan (MZN)
+#+DESCRIPTION: Including many tips and tricks using org-mode in emacs.
+#+STARTUP: showeverything
+#+OPTIONS: toc:2
+
+* TABLE OF CONTENTS :TOC:
+- [[#add-link-in-org-mode][ADD LINK IN ORG-MODE]]
+  - [[#link-format][Link Format]]
+  - [[#anchor-point][Anchor Point]]
+  - [[#internal-links][Internal Links]]
+  - [[#external-links][External links]]
+  - [[#target-link][Target Link]]
+  - [[#keybindings][Keybindings]]
+- [[#use-table-in-org-mode][USE TABLE IN ORG-MODE]]
+
+* ADD LINK IN ORG-MODE
+** Link Format
+#+begin_src txt
+[[link][description]]
+[[http://www.baidu.com][baidu]]
+#+end_src
+
+** Anchor Point
+#+begin_src txt
+<<A>>
+#+end_src
+
+** Internal Links
+The anchor point can be used as a link.
+#+begin_src txt
+[[A][toA]]
+#+end_src
+
+** External links
+#+begin_src txt
+[[http://www.baidu.com][http]]
+[[file:~/.emacs.d/init.el][file]]
+#+end_src
+
+** Target Link
+#+begin_src txt
+[[file:~/.emacs.d/init.el::5][配置第五行]]
+[[file:/docs/test.org::A][Jumo to the anchor point in test.org]]
+#+end_src
+
+** Keybindings
+| keybindings | description        |
+|-------------+--------------------|
+| =C-c C-l=   | Create/Edit a link |
+|-------------+--------------------|
+| =C-c C-o=   | Open a link        |
+
+* USE TABLE IN ORG-MODE

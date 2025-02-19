@@ -1,0 +1,90 @@
+#+TITLE: Git  
+#+AUTHOR: Ma Zhengnan (MZN)
+#+DESCRIPTION: Some useful things about using git.
+#+STARTUP: showeverything
+#+OPTIONS: toc:2
+
+* TABLE OF CONTENTS :TOC:
+- [[#configuration][CONFIGURATION]]
+- [[#branch][BRANCH]]
+- [[#rebase][REBASE]]
+- [[#some-problems-and-solve][SOME PROBLEMS AND SOLVE]]
+
+* CONFIGURATION
+Name and Email
+#+begin_src shell
+git config --global user.name "Your Name"
+git config --global user.email "you@your-domain.com"
+#+end_src
+Then execute these two commands.
+#+begin_src shell
+git config --global --add push.default current
+git config --global --add push.autoSetupRemote true  
+#+end_src
+
+You will get two benefits:
+1. No need to "git push origin xxx", just "git push"
+2. No more "no upstream branch" error, no need to "git push –set-upstream origin test && git push". Because most of the scenarios where we execute git push are to push to the remote branch with the same name.
+[[https://pawelgrzybek.com/auto-setup-remote-branch-and-never-again-see-an-error-about-the-missing-upstream][Reference]]
+
+* BRANCH
+1. View Remote Branches  
+#+begin_src shell
+   git branch -a
+#+end_src
+Run the above command in the root directory of the current project to view all branches in the project.
+
+2. View Local Branches  
+#+begin_src shell
+    git branch
+#+end_src
+
+Run the above command in the root directory of the current project to view the current branch.
+
+3. Switch Branches  
+   #+begin_src 
+    git checkout -b newBranch origin/newBranch  
+   #+end_src
+
+    If you are creating and switching to a branch for the first time, run the above command where newBranch is the newly created local branch and origin/newBranch is the remote branch.
+    ~git checkout newBranch~
+
+    If the local branch already exists, simply enter the above command to switch to the local newBranch branch.
+
+    Note: The command git checkout -b newBranch means creating a new branch newBranch and switching to it, which is equivalent to the following two commands:
+
+#+begin_src 
+     git branch newBranch
+     git checkout newBranch
+    #+end_src
+
+4. Create Branch
+   
+* REBASE
+If the documents and codes in GitHub are inconsistent with the local ones, you want to synchronize the changes on romote and push the local changes.  
+
+1. Fetch remote changes and rebase them locally:  
+    ~git pull --rebase origin branch-name~  
+  
+2. Resolve conflicts (if any):  
+    If conflicts arise during the rebase process, Git will prompt you to resolve them manually. After resolving the conflicts, continue the rebase using the following command:  
+    ~git rebase --continue~
+3. Push local changes to the remote repository:  
+   ~git push origin branch-name~
+  
+Overwriting the remote with the local  
+
+1. Submit local changes (make sure local changes have been submitted to the local repository):  
+   ~git commit -am "Your commit message"~  
+
+2. Force push local changes to the remote repository:  
+   ~git push --force origin branch-name~  
+   The `branch-name` is the name of the remote branch you wish to push to.
+
+
+* SOME PROBLEMS AND SOLVE
+1
+#+begin_src shell
+fatal: unable to access 'https://github.com/MaZhengnan/.emacs.e.git/': schannel: next InitializeSecurityContext failed: CRYPT_E_REVOCATION_OFFLINE (0x80092013)        
+(base) PS C:\SPB_Data\.emacs.e> git config --system http.sslbackend openssl
+#+end_src

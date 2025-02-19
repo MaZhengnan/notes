@@ -1,0 +1,43 @@
+#+TITLE: How to use freertos in stm32 
+#+AUTHOR: Ma Zhengnan (MZN)
+#+DESCRIPTION: Using freertos in stm32.
+#+STARTUP: showeverything
+#+OPTIONS: toc:2
+
+* Table of Contents :toc:
+- [[#introduction][INTRODUCTION]]
+- [[#basic-project-configuration][BASIC PROJECT CONFIGURATION]]
+  - [[#what-is-the-user_new_peentrant][What is the =USER_NEW_PEENTRANT=?]]
+  - [[#solve-the-timebase-warning][Solve the timebase warning]]
+- [[#freertos-in-stm32][FREERTOS IN STM32]]
+  - [[#fpu-setting-todo][FPU setting TODO]]
+
+* INTRODUCTION
++ Commercial part ID: =STM32H750XBHx=
++ Library: =FreeRTOS=
++ Platform: Stm32Cubemx + IAR
+
+* BASIC PROJECT CONFIGURATION
++ Enable =SWD=, =UARTx=, others are default.
++ FreeRTOS selects =CMSIS_V2= interface, and enable the =USER_NEW_PEENTRANT=, others are default.
+
+** What is the =USER_NEW_PEENTRANT=?
+In a real-time operating system, multiple tasks may call standard library functions (such as printf, malloc) at the same time. If these functions use global states (such as errno), *data competition* may occur. FreeRTOS solves this problem by allocating an independent reentrant structure (reent) to each task to ensure thread safety.
+
+** Solve the timebase warning
+When I am generate the project using the stm32cubemx, it gives me a warining "When RTOS is used, it is strongly recommended to use a HAL timebase source other than the Systick.The HAL timebase source can be changed from the Pinout tab under SYS".
+
+*Solved*
+=System Core= --> =SYS= --> =timebase= --> =TIM17= (not used)
+
+*Reference*
+[[https://zhuanlan.zhihu.com/p/662827180][zhihu-zhuanlan]]
+[[https://blog.csdn.net/jingluo635/article/details/130222766][csdn]]
+
+* FREERTOS IN STM32
+** FPU setting TODO
+There is an option in stm32cubemx --> Middleware and Software Packs --> FREERTOS --> Config paremeters --> MPU/FPU --> ENABLE FPU.
+I don't know if it needs to set =Enable=.
+When I set it to =Disable=, the  macro definition of =__FPU_PRESENT= in code is 1. So it used the fpu by default.
+
+ 
