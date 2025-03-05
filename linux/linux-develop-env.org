@@ -1,0 +1,82 @@
+#+TITLE: Linux Develop Environment
+#+AUTHOR: Ma Zhengnan (MZN)
+#+DESCRIPTION: I am programming on Arch Linux now  
+#+OPTIONS: toc:2
+
+* Table of Content :toc:
+- [[#using-arch-linux-on-windows-wsl2][Using Arch Linux On Windows-WSL2]]
+  - [[#installation][Installation]]
+  - [[#start-up][Start up]]
+  - [[#pacman][Pacman]]
+  - [[#refrernce][Refrernce]]
+- [[#running-emacs-on-arch-linux][Running Emacs on Arch Linux]]
+
+* Using Arch Linux On Windows-WSL2
+** Installation
++ Download [[https://github.com/yuk7/ArchWSL/releases/tag/25.3.2.0][Arch Linux]] named =Arch.zip=.
++ Double-click =arch.exe=, it will install quickly.
++ Useful commands of =wsl2= Subsystem
+  #+begin_src sh
+  wsl --list # View the wsl subsystem list
+  wsl --unregister Ubuntu # Uninstall Ubuntu subsystem
+  wsl --set-default Arch # Set Arch Linux as default.
+  wsl -d Arch  # Doesn't need this when last command setted.
+  #+end_src
+
+** Start up
+Open =arch= terminal for the first time and configure users .
+#+begin_src sh
+passwd   # password for root user
+echo "%wheel ALL=(ALL) ALL" > /etc/sudoers.d/wheel # sudo
+useradd -m -G wheel -s /bin/bash mzn # add none root user
+passwd mzn
+
+.\Arch.exe config --default-user mzn # Change the default user to a non-root user
+#+end_src
+
+** Pacman
+Open arch terminal to complete the configuration.
+
++ First, configure the pacman mirror source.
+#+begin_src sh
+vim /etc/pacman.d/mirrorlist
+#+end_src
+Then add the code below.
+#+begin_src sh
+Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
+#+end_src
+
++ Pacman-Key 
+#+begin_src sh
+pacman-key --init
+pacman-key --populate
+pacman -Sy archlinux-keyring
+#+end_src
+
++ Update Arch Linux.
+#+begin_src sh
+pacman -Syu
+#+end_src
+
++ Configure the archlinuxcn mirror source.
+#+begin_src sh
+vim /etc/pacman.conf
+#+end_src
+Add:
+#+begin_src sh
+[archlinuxcn]
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+#+end_src 
++ Install Archlinuxcn key
+#+begin_src sh
+pacman -Sy archlinuxcn-keyring
+#+end_src
+
+** Refrernce
++ [[https://learn.microsoft.com/en-us/windows/wsl/][Windows Subsystem for Linux Documentation(WSL2)]]
++ [[https://wiki.archlinux.org/title/Main_page][Arch Linux Wiki]]
++ [[https://arch.icekylin.online/][Archlinux Concise Guide]]
+
+* Running Emacs on Arch Linux
