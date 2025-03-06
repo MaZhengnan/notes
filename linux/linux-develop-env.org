@@ -9,7 +9,16 @@
   - [[#start-up][Start up]]
   - [[#pacman][Pacman]]
   - [[#refrernce][Refrernce]]
+  - [[#search-package-on-arch][Search package on arch]]
+- [[#git][Git]]
+  - [[#installation-and-configuration][Installation and configuration]]
+  - [[#reference][Reference]]
+  - [[#problems][Problems]]
+- [[#vscode][Vscode]]
+- [[#zsh][Zsh]]
 - [[#running-emacs-on-arch-linux][Running Emacs on Arch Linux]]
+  - [[#installation-1][Installation]]
+  - [[#problem][Problem]]
 
 * Using Arch Linux On Windows-WSL2
 ** Installation
@@ -78,5 +87,60 @@ pacman -Sy archlinuxcn-keyring
 + [[https://learn.microsoft.com/en-us/windows/wsl/][Windows Subsystem for Linux Documentation(WSL2)]]
 + [[https://wiki.archlinux.org/title/Main_page][Arch Linux Wiki]]
 + [[https://arch.icekylin.online/][Archlinux Concise Guide]]
+** Search package on arch
+[[https://archlinux.org/packages/?sort=&q=&maintainer=&flagged=][Where search the package.]]
+* Git
+** Installation and configuration
++ Installation
+#+begin_src sh
+sudo pacman -S git 
+#+end_src
++ Configuraiton
+#+begin_src sh
+git config --global user.name "mzn"  
+git config --global user.email "mzn@foxmail.com" 
+ssh-keygen -t rsa -C "mzn@foxmail.com"
+#+end_src
++ ssh
+#+begin_src sh
+~/.ssh/id_rsa.pub copy to https://github.com/settings/ssh/new 
+
+ssh -T git@github.com # verified if it is configure successful
+
+sudo pacman -S openssh # if varified failed
+
+#+end_src
+
+** Reference
++ [[https://qiuyedx.com/?p=1852][Blog]]
++ [[https://superuser.com/questions/335534/ssh-keygen-command-not-found-when-setting-up-git-on-windows][ssh varified failed]]
+
+** Problems 
+I want to clone my =private repositories=.
+* Vscode
+I installed vscode on =wsl2 arch linux= failed, solved below.
+#+begin_src sh
+sudo pacman -Syy  
+sudo pacman -Syu
+sudo pacman -S vscode    
+#+end_src>
+Because I want to use =vscode git gui now=. It is convience.
+
+* Zsh
++ Reference
+[[https://wiki.archlinux.org/title/Zsh#Installation][Installation]]
+[[https://wiki.archlinux.org/title/Command-line_shell#Changing_your_default_shell][Changing default shell]]
 
 * Running Emacs on Arch Linux
+** Installation
+#+begin_src sh
+sudo pacman -S emacs  # choose tree-sitter 
+
+# Necessary fonts
+sudo pacman -S ttf-fira-code   
+sudo pacman -S ttf-nerd-fonts-symbols-mono
+
+#+end_src
+
+** Problem
+Some icons are displayed incorrectly. 
