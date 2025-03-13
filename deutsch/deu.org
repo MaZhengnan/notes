@@ -1,0 +1,23 @@
+#+TITLE: Deutsch  
+#+AUTHOR: Ma Zhengnan (MZN)
+#+DESCRIPTION: deutsch
+#+OPTIONS: toc:2
+
+* 词汇区分
+
+=denn=: 因为
+eg. Wahum gehst du morgen nitch ins fitnessstudio?
+      Denn Ich habe keine zeit.
+
+表强调
+
+
+=dann=: 然后
+eg. Was machst du morgen?
+      Ich fahre zu erst zum Krankenhaus und dann fahre ich ins fitnessstudio.
+
+
+=zu erst=: 首先
+
+
+=dort= 在那
