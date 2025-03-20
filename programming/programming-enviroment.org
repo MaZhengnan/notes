@@ -1,0 +1,144 @@
+#+TITLE: Programming Development Environment Setting Up
+#+AUTHOR: Zhengnan Ma(MZN)
+#+OPTIONS: toc:2
+
+* Table of Contents :toc:
+- [[#arch-linux][Arch Linux]]
+  - [[#using-arch-linux-on-windows-wsl2][Using Arch Linux On Windows-WSL2]]
+  - [[#git][Git]]
+  - [[#vscode][Vscode]]
+  - [[#zsh][Zsh]]
+  - [[#running-emacs-on-arch-linux][Running Emacs on Arch Linux]]
+  - [[#installation][Installation]]
+- [[#macos][Macos]]
+- [[#generate-a-install-script][Generate a Install Script]]
+
+* Arch Linux
+** Using Arch Linux On Windows-WSL2
+*** Installation
++ Download [[https://github.com/yuk7/ArchWSL/releases/tag/25.3.2.0][Arch Linux]] named =Arch.zip=.
++ Double-click =arch.exe=, it will install quickly.
++ Useful commands of =wsl2= Subsystem
+  #+begin_src sh
+  wsl --list # View the wsl subsystem list
+  wsl --unregister Ubuntu # Uninstall Ubuntu subsystem
+  wsl --set-default Arch # Set Arch Linux as default.
+  wsl -d Arch  # Doesn't need this when last command setted.
+  #+end_src
+
+*** Start up
+Open =arch= terminal for the first time and configure users .
+#+begin_src sh
+passwd   # password for root user
+echo "%wheel ALL=(ALL) ALL" > /etc/sudoers.d/wheel # sudo
+useradd -m -G wheel -s /bin/bash mzn # add none root user
+passwd mzn
+
+.\Arch.exe config --default-user mzn # Change the default user to a non-root user
+#+end_src
+
+*** Pacman
+Open arch terminal to complete the configuration.
+
++ First, configure the pacman mirror source.
+#+begin_src sh
+vim /etc/pacman.d/mirrorlist
+#+end_src
+Then add the code below.
+#+begin_src sh
+Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
+#+end_src
+
++ Pacman-Key 
+#+begin_src sh
+pacman-key --init
+pacman-key --populate
+pacman -Sy archlinux-keyring
+#+end_src
+
++ Update Arch Linux.
+#+begin_src sh
+pacman -Syu
+#+end_src
+
++ Configure the archlinuxcn mirror source.
+#+begin_src sh
+vim /etc/pacman.conf
+#+end_src
+Add:
+#+begin_src sh
+[archlinuxcn]
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+#+end_src 
++ Install Archlinuxcn key
+#+begin_src sh
+pacman -Sy archlinuxcn-keyring
+#+end_src
+
+*** Refrernce
++ [[https://learn.microsoft.com/en-us/windows/wsl/][Windows Subsystem for Linux Documentation(WSL2)]]
++ [[https://wiki.archlinux.org/title/Main_page][Arch Linux Wiki]]
++ [[https://arch.icekylin.online/][Archlinux Concise Guide]]
+*** Search package on arch
+[[https://archlinux.org/packages/?sort=&q=&maintainer=&flagged=][Where search the package.]]
+** Git
+*** Installation and configuration
++ Installation
+#+begin_src sh
+sudo pacman -S git 
+#+end_src
++ Configuraiton
+#+begin_src sh
+git config --global user.name "mzn"  
+git config --global user.email "mzn@foxmail.com" 
+ssh-keygen -t rsa -C "mzn@foxmail.com"
+#+end_src
++ ssh
+#+begin_src sh
+~/.ssh/id_rsa.pub copy to https://github.com/settings/ssh/new 
+
+ssh -T git@github.com # verified if it is configure successful
+
+sudo pacman -S openssh # if varified failed
+
+#+end_src
+
+*** Reference
++ [[https://qiuyedx.com/?p=1852][Blog]]
++ [[https://superuser.com/questions/335534/ssh-keygen-command-not-found-when-setting-up-git-on-windows][ssh varified failed]]
+
+** Vscode
+I installed vscode on =wsl2 arch linux= failed, solved below.
+#+begin_src sh
+sudo pacman -Syy  
+sudo pacman -Syu
+sudo pacman -S vscode    
+#+end_src>
+Because I want to use =vscode git gui now=. It is convience.
+
+** Zsh
++ Reference
+[[https://wiki.archlinux.org/title/Zsh#Installation][Installation]]
+[[https://wiki.archlinux.org/title/Command-line_shell#Changing_your_default_shell][Changing default shell]]
+
+** Running Emacs on Arch Linux
+** Installation
+#+begin_src sh
+sudo pacman -S emacs  # choose tree-sitter 
+
+# Necessary fonts
+sudo pacman -S ttf-fira-code   
+sudo pacman -S ttf-nerd-fonts-symbols-mono
+
+#+end_src
+
+
+
+
+* Macos
+
+
+
+* Generate a Install Script
