@@ -4,7 +4,8 @@
 
 * Table of Contents :toc:
 - [[#arch-linux][Arch Linux]]
-  - [[#using-arch-linux-on-windows-wsl2][Using Arch Linux On Windows-WSL2]]
+  - [[#using-arch-linux][Using Arch Linux]]
+  - [[#install-cli-tools-and-apps][Install cli-tools and apps]]
   - [[#git][Git]]
   - [[#vscode][Vscode]]
   - [[#zsh][Zsh]]
@@ -14,8 +15,8 @@
 - [[#generate-a-install-script][Generate a Install Script]]
 
 * Arch Linux
-** Using Arch Linux On Windows-WSL2
-*** Installation
+** Using Arch Linux
+*** Installation (On Windows-WSL2)
 + Download [[https://github.com/yuk7/ArchWSL/releases/tag/25.3.2.0][Arch Linux]] named =Arch.zip=.
 + Double-click =arch.exe=, it will install quickly.
 + Useful commands of =wsl2= Subsystem
@@ -83,6 +84,12 @@ pacman -Sy archlinuxcn-keyring
 + [[https://arch.icekylin.online/][Archlinux Concise Guide]]
 *** Search package on arch
 [[https://archlinux.org/packages/?sort=&q=&maintainer=&flagged=][Where search the package.]]
+** Install cli-tools and apps
+#+begin_src shell
+
+ 
+
+#+end_src
 ** Git
 *** Installation and configuration
 + Installation
