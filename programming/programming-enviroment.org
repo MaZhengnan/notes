@@ -6,12 +6,10 @@
 - [[#arch-linux][Arch Linux]]
   - [[#using-arch-linux][Using Arch Linux]]
   - [[#install-cli-tools-and-apps][Install cli-tools and apps]]
-  - [[#git][Git]]
-  - [[#vscode][Vscode]]
-  - [[#zsh][Zsh]]
-  - [[#running-emacs-on-arch-linux][Running Emacs on Arch Linux]]
-  - [[#installation][Installation]]
+  - [[#configuration][Configuration]]
 - [[#macos][Macos]]
+  - [[#install-cli-tools-and-apps-1][Install cli-tools and apps]]
+  - [[#configuration-1][Configuration]]
 - [[#generate-a-install-script][Generate a Install Script]]
 
 * Arch Linux
@@ -35,6 +33,7 @@ echo "%wheel ALL=(ALL) ALL" > /etc/sudoers.d/wheel # sudo
 useradd -m -G wheel -s /bin/bash mzn # add none root user
 passwd mzn
 
+# Only in wsl2 arch linux
 .\Arch.exe config --default-user mzn # Change the default user to a non-root user
 #+end_src
 
@@ -82,20 +81,49 @@ pacman -Sy archlinuxcn-keyring
 + [[https://learn.microsoft.com/en-us/windows/wsl/][Windows Subsystem for Linux Documentation(WSL2)]]
 + [[https://wiki.archlinux.org/title/Main_page][Arch Linux Wiki]]
 + [[https://arch.icekylin.online/][Archlinux Concise Guide]]
+
 *** Search package on arch
 [[https://archlinux.org/packages/?sort=&q=&maintainer=&flagged=][Where search the package.]]
+
 ** Install cli-tools and apps
+
+This needs to packaging as a script to install these packages automaticlly.
 #+begin_src shell
-
- 
-
-#+end_src
-** Git
-*** Installation and configuration
-+ Installation
-#+begin_src sh
+# update packages manager
+sudo pacman -Syy  
+sudo pacman -Syu
+# programming lsp
+sudo pacman -S clang
+# cmake
+sudo pacman -S make
+sudo pacman -S cmake
+sudo pacman -S cmake-language-server
+# git configuration
 sudo pacman -S git 
+sudo pacman -S openssh 
+# vscode
+sudo pacman -S vscode
+# emacs and fonts for terminal and emacs
+sudo pacman -S emacs
+sudo pacman -S ttc-iosevka
+sudo pacman -S ttc-iosevka-aile
+sudo pacman -S ttf-nerd-fonts-symbols-mono
+# only using on wsl2 arch linux to share the clipboard with windows
+sudo pacman -S xclip
+# terminal and manage the configuration(dotfiles)
+sudo pacman -S zsh 
+sudo pacman -S stow
+
+
 #+end_src
+
+** Configuration
+*** Zsh
++ Reference
+[[https://wiki.archlinux.org/title/Zsh#Installation][Installation]]
+[[https://wiki.archlinux.org/title/Command-line_shell#Changing_your_default_shell][Changing default shell]]
+
+*** Git
 + Configuraiton
 #+begin_src sh
 git config --global user.name "mzn"  
@@ -111,41 +139,46 @@ ssh -T git@github.com # verified if it is configure successful
 sudo pacman -S openssh # if varified failed
 
 #+end_src
-
-*** Reference
-+ [[https://qiuyedx.com/?p=1852][Blog]]
-+ [[https://superuser.com/questions/335534/ssh-keygen-command-not-found-when-setting-up-git-on-windows][ssh varified failed]]
-
-** Vscode
-I installed vscode on =wsl2 arch linux= failed, solved below.
-#+begin_src sh
-sudo pacman -Syy  
-sudo pacman -Syu
-sudo pacman -S vscode    
-#+end_src>
-Because I want to use =vscode git gui now=. It is convience.
-
-** Zsh
 + Reference
-[[https://wiki.archlinux.org/title/Zsh#Installation][Installation]]
-[[https://wiki.archlinux.org/title/Command-line_shell#Changing_your_default_shell][Changing default shell]]
+ [[https://qiuyedx.com/?p=1852][Blog]]
+ [[https://superuser.com/questions/335534/ssh-keygen-command-not-found-when-setting-up-git-on-windows][ssh varified failed]]
 
-** Running Emacs on Arch Linux
-** Installation
-#+begin_src sh
-sudo pacman -S emacs  # choose tree-sitter 
+* Macos
+** Install cli-tools and apps
+First of all, I need to install [[https://brew.sh/][brew]].
 
-# Necessary fonts
-sudo pacman -S ttf-fira-code   
-sudo pacman -S ttf-nerd-fonts-symbols-mono
+- Update and Upgrade
+#+begin_src shell
+brew update 
+brew upgrade
+#+end_src
+
+- CLI tools
+#+begin_src shell
+
+brew install fzf
+brew install fd
+brew install ripgrep 
+brew install git
+brew install lazygit
+brew install stow
+brew install tree
 
 #+end_src
 
+- App
+#+begin_src shell
 
+brew install --cask emacs
+brew install --cask google-chrome
+brew install --cask wezterm
+brew install --cask visual-studio-code
+brew install --cask font-iosevka
+brew install --cask wechat
 
+#+end_src
 
-* Macos
-
-
+** Configuration
+Others are the same as Arch Linux.
 
 * Generate a Install Script
