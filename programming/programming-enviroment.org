@@ -90,10 +90,17 @@ pacman -Sy archlinuxcn-keyring
 This needs to packaging as a script to install these packages automaticlly.
 #+begin_src shell
 # update packages manager
-sudo pacman -Syy  
+sudo pacman -Syy # when install failed 
 sudo pacman -Syu
+
+# for all programming languages format
+sudo pacman -S diffutils
+
 # programming lsp
 sudo pacman -S clang
+#for c/c++ format
+sudo pacman -S clang-format
+
 # cmake
 sudo pacman -S make
 sudo pacman -S cmake
@@ -116,6 +123,21 @@ sudo pacman -S stow
 
 
 #+end_src
+
+*** diffutils
+=Diffutils= is a GNU tool set that provides core command-line tools for comparing file and directory differences. Its main function is to generate differences (diff) between files. It is one of the basic tools of Unix/Linux systems. Many development tools (such as =Git=, =Emacs's apheleia=, etc.) rely on it to handle file changes.
+
+1. Tools included in diffutils
+   + =diff= compares the differences between two files or directories and outputs the difference lines (used by apheleia for formatting comparison)
+   + =cmp= compares two files byte by byte, suitable for binary files
+   + =sdiff= displays the differences between two files side by side
+   + =diff3= compares the differences between three files (used in merge conflict scenarios)
+
+2. Why does =apheleia= or =git= need diff?
+   When apheleia formats code, its default workflow is:
+   + Use a formatting tool (such as clang-format) to process the current file and generate a temporary file.
+   + Call diff to compare the original file and the temporary file to generate a difference patch.
+   + Apply the difference patch to the original file to avoid direct overwriting (to ensure atomicity and safety).
 
 ** Configuration
 *** Zsh
