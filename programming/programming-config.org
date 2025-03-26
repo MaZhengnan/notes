@@ -1,0 +1,74 @@
+#+TITLE: Programming Configuration and Configure files
+#+AUTHOR: Zhengnan Ma(MZN)
+#+OPTIONS: toc:2
+
+* Table of Contents :toc:
+- [[#cc][C/C++]]
+  - [[#clang-format][.clang-format]]
+  - [[#cmakeliststxt][CMakeLists.txt]]
+- [[#python][Python]]
+- [[#git][Git]]
+  - [[#fundamental][Fundamental]]
+  - [[#configuration][Configuration]]
+  - [[#gitignore][.gitignore]]
+
+* C/C++
+** .clang-format
++ .clang-format 文件如何让if else首尾相连
+   #+begin_src yaml
+   BasedOnStyle: Google  # 或者其他的风格
+   IndentWidth: 4        # 缩进宽度
+
+   # 控制 if, else, else if 的格式
+   AllowShortIfStatementsOnASingleLine: true
+   AllowShortBlocksOnASingleLine: true
+   AllowShortCaseLabelsOnASingleLine: true
+   #+end_src
+
++ 详细说明
+
+  - AllowShortIfStatementsOnASingleLine: true：这个选项允许将短的 if 语句放在一行上，包括后续的 else 语句。
+
+  - AllowShortBlocksOnASingleLine: true：这个选项允许将短的代码块（包括 if-else 语句块）放在一行上。
+
+  - AllowShortCaseLabelsOnASingleLine: true：这个选项允许在 switch 语句中将短的 case 标签放在一行上。
+   
++ Example code
+#+begin_src c
+   if (condition) {
+     doSomething();
+   } else {
+     doSomethingElse();
+   }
+#+end_src
+
+** CMakeLists.txt
+
+
+* Python
+* Git
+** Fundamental
+
+** Configuration
+
+** .gitignore
+Ignore a text.txt file located in the root directory.
+~/text.txt~
+
+Ignore a text.txt file located in a test directory at the root directory.
+~/test/text.txt~
+
+Ignore any text.txt files.
+~text.txt~
+
+To ignore an entire directory with all its contents.
+~test/~
+
+To ignore all files and directories that have a name starting with img.
+~img*~
+
+To ignore all markdown files that end with a .md file extension.
+~*.md~
+
++ Reference 
+  [[https://www.freecodecamp.org/chinese/news/gitignore-file-how-to-ignore-files-and-folders-in-git/][gitignore File – How to Ignore Files and Folders in Git]]

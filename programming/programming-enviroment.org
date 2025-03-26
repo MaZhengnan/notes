@@ -14,11 +14,28 @@
 
 * Arch Linux
 ** Using Arch Linux
+*** Install Windows-WSL2
+
++ i. Search and open the enable or disable Windows features.
++ ii. Open Hyper-V, Virtual Machine Platform and Windows Subsystem for Linux.
++ iii. Open whindows terminal and type:
+   #+begin_src sh
+   wsl update
+   wsl --set-default-version 2
+   wsl --list --online
+   wsl --install -d ubuntu-24.04,'ubuntu-24.04' could be changed.
+ 
+  #+end_src
++ iv. Open ubuntu terminal and type:
+   sudo apt-get update and sudo apt-get upgrade.
+
+Reference:[[https://learn.microsoft.com/zh-cn/windows/wsl/install][Install Linux on Windows with WSL]]
+
 *** Installation (On Windows-WSL2)
 + Download [[https://github.com/yuk7/ArchWSL/releases/tag/25.3.2.0][Arch Linux]] named =Arch.zip=.
 + Double-click =arch.exe=, it will install quickly.
 + Useful commands of =wsl2= Subsystem
-  #+begin_src sh
+  #+begin_src shell
   wsl --list # View the wsl subsystem list
   wsl --unregister Ubuntu # Uninstall Ubuntu subsystem
   wsl --set-default Arch # Set Arch Linux as default.
@@ -168,7 +185,6 @@ sudo pacman -S openssh # if varified failed
 * Macos
 ** Install cli-tools and apps
 First of all, I need to install [[https://brew.sh/][brew]].
-
 - Update and Upgrade
 #+begin_src shell
 brew update 
