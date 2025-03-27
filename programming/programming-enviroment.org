@@ -129,6 +129,8 @@ sudo pacman -S openssh
 sudo pacman -S vscode
 # emacs and fonts for terminal and emacs
 sudo pacman -S emacs
+sudo pacman -S ripgrep
+sudo pacman -S libvterm
 sudo pacman -S ttc-iosevka
 sudo pacman -S ttc-iosevka-aile
 sudo pacman -S ttf-nerd-fonts-symbols-mono
