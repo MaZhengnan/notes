@@ -2,9 +2,21 @@
 #+AUTHOR: Zhengnan Ma(MZN)
 #+OPTIONS: toc:2
 
-* Table Of Contents :toc: 
-
-
+* Table Of Contents :toc:
+- [[#programming-languages-i-want-to-learn][Programming languages I want to learn]]
+- [[#plan-and-studing-methods][Plan and studing methods]]
+- [[#course-and-books][Course and books]]
+  - [[#introduce][Introduce]]
+  - [[#detail][Detail]]
+- [[#7-coding-projects][7 coding projects]]
+  - [[#a-ray-tracer][A Ray Tracer]]
+  - [[#an-operating-system][An Operating System]]
+  - [[#an-emulator][An Emulator]]
+  - [[#an-interpreter][An Interpreter]]
+  - [[#web-server][Web Server]]
+  - [[#a-neural-network][A Neural Network]]
+  - [[#a-blockchain][A Blockchain]]
+- [[#cs-self-learning][CS Self Learning]]
 
 * Programming languages I want to learn
 + c
@@ -15,7 +27,6 @@
 + css + html + javascript
 
 * Plan and studing methods 
-
 1. 掌握了编程的核心概念：他们已经理解了变量、数据结构、控制流、面向对象、函数式编程等核心思想，无论换什么语言，这些概念都是通用的。
 2. 熟悉计算机基础：掌握计算机系统、内存管理、并发、算法等基础知识，让他们能快速适应新语言的底层实现。
 3. 有跨语言经验：多学几门语言后，他们会发现很多语言的模式和特性是类似的，比如 Python、JavaScript 和 Rust 都有闭包、泛型（某种程度上）等概念。
@@ -23,7 +34,6 @@
 5. 注重实战：他们学新语言时，通常会直接写小项目，而不是只学语法。
 
 * Course and books
-
 ** Introduce
 1. 计算机科学基础
     +  CS50: Introduction to Computer Science（哈佛大学公开课，适合初学者）[[https://www.edx.org/cs50][links]]
@@ -128,3 +138,108 @@ SICP（计算机编程思想） or Code Complete（工程实践）
 作用域链、变量捕获、高阶函数
 资源：《JavaScript 你不知道的那点事》+ Rust 官方文档
 
+* 7 coding projects
+[[https://medium.com/@keyvank/7-coding-projects-every-programming-hobbyist-should-write-before-his-death-79d931cf4192][7 coding projects every programming hobbyist should write before his death]] by [[https://medium.com/@keyvank][Keyvan Kambakhsh]].
+And his [[https://github.com/keyvank][github homepage]] is intresting!
+** A Ray Tracer
+Ray Tracing doesn’t completely implement the [[https://en.wikipedia.org/wiki/Rendering_equation][Rendering Equation]] but it is a very good start for learning other more advanced rendering algorithms. You can read more about it [[https://en.wikipedia.org/wiki/Ray_tracing_(graphics)][Wikipedia]].
+
+By developing a 3D renderer, you will learn:
++ How all those 3D animations are built.
++ How parallel programming can help us with problems like this.
++ Linear algebra, 3D math, matrices and why you should take your math classes seriously!
++ (Bonus!) BSP trees if you are tired of rendering spheres and you want something more.
+
+*Related algorithm*
++ [[https://en.wikipedia.org/wiki/Path_tracing][Path Tracing]] that will completely implement the rendering equation and gives you results that are indistinguishable from reality.
++ [[https://en.wikipedia.org/wiki/Rasterisation][Rasterisation]] which is the algorithm used in games for generating real-time 3D.
+
+*Demo*
++ [[https://github.com/keyvank/pyglare][pyglare]]
++ [[https://www.kevinbeason.com/smallpt/][smallpt]]
+
+*Useful link*
++ [[https://www.scratchapixel.com/][scratchapixel]]
+
+** An Operating System
+By developing an OS you will learn:
++ How your computer boots up from the time you press the power key.
++ How Operating Systems manage multiple processes.
++ How programs are protected from modifying each other.
++ How files are stored on the disk.
++ What linkers and loaders are and how they work.
++ Low level stuff!
+
+*Toturial*
++ [[https://github.com/cfenollosa/os-tutorial][os-tutorial]] gives you a very great introduction on how to write your own OS using C programming language.
++ [[https://github.com/keyvank/zincos][zincos]] is a simple operating system which has multitasking, userland, and paging, which is written in C++11.
++ [[http://www.brokenthorn.com/Resources/OSDevIndex.html][Operating System Development Series]] is super and [[https://wiki.osdev.org/Expanded_Main_Page][OSDev Wiki]] as its reference manual.
+
+** An Emulator
+So, having written the shiny brand new Operating System in the previous step and bing now fluent in talking with iron. Next step is to emulate the iron itself! There are plenty of great hardware out there that you can emulate. You can start with simpler ones like =CHIP-8= and move further by implementing a complete =NES= emulator, like the video below!
+  
+By developing emulators you will learn:
++ Computer Architecture
++ Different design strategies in different hardware.
++ Instruction set of the target machine.
+
+*Tutorial*
++ [[https://en.wikipedia.org/wiki/CHIP-8][CHIP-8]]
++ [[https://yizhang82.dev/nes-emu-overview][NES]]
++ [[https://www.youtube.com/watch?v=XZWw745wPXY][Creating a NES emulator in C++11]]
++ [[https://www.youtube.com/user/Bisqwit][Bisqwit's Youtube Channel]]
+
+
+** An Interpreter
+/If you don’t know how compilers work, then you don’t know how computers work. If you’re not 100% sure whether you know how compilers work, then you don’t know how they work. (Steve Yegge)/
+
+Coding with your own language would be really satisfying. [[https://ruslanspivak.com/][Ruslan Spivak]] has a great tutorial series on how to write an interpreter in Python. In this series you will implement an interpreter for Pascal programming language from scratch. You will start by implementing a [[https://en.wikipedia.org/wiki/Lexical_analysis][lexical analyzer]] and [[https://en.wikipedia.org/wiki/Parsing#Computer_languages][parser]] for it, and will move further by implementing different features of Pascal language.
+
+If you want something simpler and more fun, [[https://norvig.com/][Peter Norvig]] has an article on [[https://norvig.com/lispy.html][(How to Write a (Lisp) Interpreter (in Python))]]. Lisp is a functional programming language. As Lisp has a very simple syntax, it would be easy to write a lexical scanner and parser for it and therefore it is a very good start for learning how interpreters work. If you have not tried functional programming languages before, you will also get a taste of functional programming too. 
+
+If you are brave enough, you can also try implementing a Compiler too. Start with implementing a C compiler which is able to compile itself! Check out [[https://github.com/rui314/8cc][this project]]. His author has tried to implement a minimal C compiler which supports all C11 language features while keeping the code as small and simple as possible.
+
+By writing an interpreter/compiler you will learn:
++ Writing lexical analyzers & parsers by yourself and using tools developed for this purpose.
++ Implementing interpreters.
++ Code generation and compilers.
++ (Bonus!) Functional programming if you followed the second tutorial :)
+
+** Web Server
+The process is like:
+   1. Your operating system resolves the IP address of that domain by asking DNS servers, there is a great illustration of this process here(The websit is unknown)!
+   2. Your browser asks port 80 of that particular IP address to send its HTML content to us.
+   3. Your browser renders the response on the screen.
+So you are going to implement the second step of this process. For that, you should learn a little bit about Socket programming in the language you are coding with, listen to the port 80 of your network interface, return HTML contents according to the URL the client is requesting.
+
+Your Web Server should be able to:
++ Take a root directory in its config file and respond with HTML content according to the URL the client is requesting.
++ Respond with files.
++ (Bonus!) Provide an interface for programmers to develop dynamic web applications with.
+
+  
+** A Neural Network
+Deep learning is a trending topic today. Start by learning the backpropagation algorithm, used for simple feed-forward neural networks. Then try to build a network that is capable of learning the MNIST database. You will end up developing a software that is able to recognize handwritten digits!
+
+[[https://venelinvalkov.medium.com/tensorflow-for-hackers-part-iv-neural-network-from-scratch-1a4f504dfa8][Creating a Neural Network from Scratch]] is a great article by [[https://venelinvalkov.medium.com/][Venelin Valkov]] that teaches you how to build a vanilla Neural Network from scratch in Python without using tools like TensorFlow.
+
+By implementing a neural network you will learn:
++ How multiple layers of simple neurons can learn complex representations.
++ The building blocks of Neural Networks and Deep Learning.
++ GPGPU programming if you want to do something more serious.
+
+** A Blockchain
+Blockchains are fun. Before getting started, I highly recommend you to read the famous [[https://bitcoin.org/bitcoin.pdf][Bitcoin Whitepaper]].
+
+Don’t get me wrong. I am not telling you to create another fork of Litecoin or whatever scam shit. But you should really understand how all those cryptocurrencies work. They are genius, they have many brilliant ideas underneath. Learn blockchains by creating them from scratch, there is a great article on this [[https://cranklin.wordpress.com/2017/07/11/lets-create-our-own-cryptocurrency/][here]]!
+
+You can also have your coin listed on exchanges if your project has something new to provide!
+
+By implementing a blockchain you will learn:
++ Cryptography stuff like hash functions, public/private keys and etc.
++ How P2P applications are implemented.
++ How to create consensus in a network with some brilliant ideas like PoW / PoS.
+
+* CS Self Learning 
+[[https://csdiy.wiki/][The book for learning cs by self]].
+[[https://github.com/Tikam02/DevOps-Guide][Maybe like a dictionary on programming]].

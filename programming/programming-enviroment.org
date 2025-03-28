@@ -42,6 +42,21 @@ Reference:[[https://learn.microsoft.com/zh-cn/windows/wsl/install][Install Linux
   wsl -d Arch  # Doesn't need this when last command setted.
   #+end_src
 
+*** WSL2-Arch linux share the folder with windows10/11
+All Windows disk directories are in the /mnt directory of WSL.
+#+begin_src shell
+cd /mnt 
+ls 
+# print c/ d/ e/ l/
+#+end_src
+
+Use soft links to build a development environment synchronized with Windows under WSL.
+#+begin_src shell
+mkdir folder_name
+cd folder_name
+ln -s /mnt/e/folder_name folder_name
+#+end_src
+
 *** Start up
 Open =arch= terminal for the first time and configure users .
 #+begin_src sh
