@@ -7,6 +7,7 @@
   - [[#clang-format][.clang-format]]
   - [[#cmakeliststxt][CMakeLists.txt]]
 - [[#python][Python]]
+  - [[#enviromentyml][enviroment.yml]]
 - [[#git][Git]]
   - [[#fundamental][Fundamental]]
   - [[#configuration][Configuration]]
@@ -45,6 +46,22 @@
 ** CMakeLists.txt
 
 * Python
+I am using miniconde as my python development environment.  
+** enviroment.yml
+#+begin_src yaml
+# environment.yml
+name: my_project
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - numpy
+  - pandas
+#+end_src
+Then run ~conda env create -f environment.yml~.
+If use mamba ~mamba env create -f environment.yml~
+
 * Git
 ** Fundamental
 

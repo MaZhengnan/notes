@@ -10,6 +10,9 @@
 - [[#macos][Macos]]
   - [[#install-cli-tools-and-apps-1][Install cli-tools and apps]]
   - [[#configuration-1][Configuration]]
+- [[#miniconda][Miniconda]]
+  - [[#installation][Installation]]
+  - [[#setting-up][Setting up]]
 - [[#generate-a-install-script][Generate a Install Script]]
 
 * Arch Linux
@@ -235,5 +238,48 @@ brew install --cask wechat
 
 ** Configuration
 Others are the same as Arch Linux.
+
+* Miniconda
+** Installation
++ Linux
+  #+begin_src shell
+  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+  sha256sum Miniconda3-latest-Linux-x86_64.sh
+  bash Miniconda3-latest-Linux-x86_64.sh
+  #+end_src
++ Macos
+  #+begin_src 
+  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -O Miniconda3.sh
+  chmod +x Miniconda3.sh
+  ./Miniconda3.sh
+  #+end_src
+  
+** Setting up
+Conda init.
+#+begin_src shell
+~/miniconda3/bin/conda init zsh  # 如果用 zsh
+source ~/.zshrc  
+#+end_src
+
+Disbale =base= enviroment.
+#+begin_src shell
+conda config --set auto_activate_base false
+#+end_src
+
+Install =mamba=.
+#+begin_src shell
+conda create -n conda_tools -c conda-forge mamba
+conda activate conda_tools
+#+end_src
+
+Using =mamba= replace =conda=.
+#+begin_src shell
+mamba create -n new_env python=3.10 
+#+end_src
+
+When using mamba, need to activate the =conda_tools= environment first.
+#+begin_src shell
+conda activate conda_tools
+#+end_src
 
 * Generate a Install Script
