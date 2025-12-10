@@ -64,6 +64,100 @@ If use mamba ~mamba env create -f environment.yml~
 
 * Git
 ** Fundamental
+Delete all the configuration and setup user name and user email.
+#+begin_src sh
+git config --global --unset-all
+git config --global user.name "你的用户名"
+git config --global user.email "你的邮箱"
+#+end_src
+
+Generate ssh key for ~gitee~ and ~github~ on Linux/Macos and Windows.
+- Linux/Macos
+#+begin_src sh
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github -C "你的GitHub邮箱"
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_gitee -C "你的Gitee邮箱"
+#+end_src
+-Windows
+#+begin_src sh
+ssh-keygen -t ed25519 -f "$env:USERPROFILE\.ssh\id_ed25519_github" -C "你的GitHub邮箱"
+ssh-keygen -t ed25519 -f "$env:USERPROFILE\.ssh\id_ed25519_gitee" -C "你的Gitee邮箱"
+#+end_src
+
+Setup permissions if needed(Windows).
+#+begin_src sh
+# 设置私钥权限（仅当前用户可读）
+icacls "$env:USERPROFILE\.ssh\id_ed25519_github" /inheritance:r /grant:r "$env:USERNAME:(R)"
+icacls "$env:USERPROFILE\.ssh\id_ed25519_github" /deny "Everyone:(F)"
+
+# 设置 .ssh 目录权限
+icacls "$env:USERPROFILE\.ssh" /inheritance:r /grant:r "$env:USERNAME:(F)"
+icacls "$env:USERPROFILE\.ssh" /deny "Everyone:(F)"
+
+#+end_src>
+
+Add the public/private key. Login ~github~ and ~gitee~ GitHub → Settings → SSH and GPG keys → New SSH key. Copy ~sshkey~ from ~id_ed25519_github.pub~ and ~id_ed25519_gitee.pub~ and paste.
+
+Create/edit ssh configuration file.
+#+begin_src sh
+# for Linux/Macos
+touch ~/.ssh/config
+chmod 600 ~/.ssh/config
+
+# for Windows
+
+#+end_src
+
+Edit =~/.ssh/config= file
+#+begin_src sh
+ # GitHub 配置
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_github
+
+# Gitee 配置
+Host gitee.com
+    HostName gitee.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_gitee
+#+end_src
+
+Config SSH Agent
+#+begin_src sh
+# Linux/Macos
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519_github
+ssh-add ~/.ssh/id_ed25519_gitee
+
+# Windows
+# 为 GitHub 生成密钥
+ssh-keygen -t ed25519 -f "$env:USERPROFILE\.ssh\id_ed25519_github" -C "github@example.com"
+# 为 Gitee 生成密钥
+ssh-keygen -t ed25519 -f "$env:USERPROFILE\.ssh\id_ed25519_gitee" -C "gitee@example.com"
+# 确保服务已启动
+Start-Service ssh-agent
+# 添加密钥（需要输入密钥密码，如果设置了）
+ssh-add "$env:USERPROFILE\.ssh\id_ed25519_github"
+ssh-add "$env:USERPROFILE\.ssh\id_ed25519_gitee"
+#+end_src
+
+Let SSH Agent automatically load keys(add in =~/.bashrc= or =~./.zshrc= )
+#+begin_src sh
+if [ -z "$SSH_AUTH_SOCK" ]; then
+   eval "$(ssh-agent -s)"
+   ssh-add ~/.ssh/id_ed25519_github
+   ssh-add ~/.ssh/id_ed25519_gitee
+fi
+#+end_src
+
+Test connection
+#+begin_src sh
+# 测试 GitHub
+ssh -T git@github.com
+# 测试 Gitee
+ssh -T git@gitee.com
+#+end_src
+
 
 ** Configuration
 
